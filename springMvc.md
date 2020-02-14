@@ -1324,7 +1324,11 @@ public class AccountController {
  "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
  "http://java.sun.com/dtd/web-app_2_3.dtd" >
 
-<web-app>
+<web-app xmlns="http://java.sun.com/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
+          http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+         version="3.0">
   <display-name>Archetype Created Web Application</display-name>
   <!--设置配置文件路径-->
   <context-param>
@@ -1434,6 +1438,7 @@ public class AccountController {
     <!--创建工厂-->
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="dataSource" ref="dataSource"/>
+     	  <property name="typeAliasesPackage" value="com.hpy.domain"/>
     </bean>
     <!--设置扫描的dao下的所有包 就是相当于mapping-->
     <bean id="mapperScanner" class="org.mybatis.spring.mapper.MapperScannerConfigurer">
@@ -1453,7 +1458,7 @@ public class AccountController {
     <!--aop增强-->
     <aop:config>
      <aop:advisor 
-       advice-ref="txAdvice"pointcut="execution(*com.hpy.service.Impl.*ServletImpl.*(..))"/>
+       advice-ref="txAdvice" pointcut="execution(* com.hpy.service.Impl.*ServletImpl.*(..))"/>
     </aop:config>
 </beans>
 ```
